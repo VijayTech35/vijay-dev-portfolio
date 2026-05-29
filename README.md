@@ -1,36 +1,67 @@
-# Personal Portfolio Website in React
+# Vijay Kumar — Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive personal portfolio website built with React. Showcases skills, experience, projects, and contributions with a dark/light theme, animations, and interactive UI.
 
-<img width="1266" alt="Screen Shot 2022-06-19 at 2 18 18 PM" src="https://user-images.githubusercontent.com/50160672/174933373-1ba6cadf-1c9a-48c3-aa58-984d0bd62d82.png">
+**Live Demo:** [https://vijay-dev-portfolio.vercel.app](https://vijay-dev-portfolio.vercel.app)
 
-Built using:
+---
 
-- Front-end library: React
-- CSS framework: React-bootstrap
-- CSS animations library: Animate.css
+## Built With
 
-In the /personal-portfolio, you can run:
+- **React 18** — component-based UI
+- **Framer Motion** — page/scroll animations, tilt cards
+- **CSS Custom Properties** — dark/light theme via CSS variables
+- **Devicons CDN** — SVG tech-stack icons
+- **Formspree** — contact form backend
+- **Calendly** — book-a-call integration
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Dark / light mode toggle with persistent preference
+- Typewriter hero with animated profile ring
+- Tab-based skills section (Frontend / Backend / Tools)
+- Vertical timeline experience with glass-morphism cards
+- Tilt-enabled project cards with screenshot previews
+- GitHub contribution graph + LeetCode stats side-by-side
+- Contact form, copy-email, and book-a-call button
+- Scroll-spy navigation with smooth scrolling
+- Floating back-to-top button, particles background, cursor glow
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Sections
 
-### `npm test`
+| Section      | Description |
+|--------------|-------------|
+| Hero         | Intro, typewriter, CTA buttons, social links |
+| About        | Bio, tech tags, stats, profile card |
+| Skills       | Tabbed grid of devicons with brand colors |
+| Experience   | Timeline with company badges and project highlights |
+| Projects     | Featured + 2-column grid with live/github links |
+| GitHub/LC    | Contribution calendar + LeetCode stats |
+| Contact      | Form, email copy, Calendly booking, socials |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+```bash
+git clone https://github.com/VijayTech35/vijay-dev-portfolio.git
+cd vijay-dev-portfolio
+npm install
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Runs at [http://localhost:3000](http://localhost:3000).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Build
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm run build
+```
+
+Outputs a production-ready `build/` folder. Deploy to Vercel, Netlify, or GitHub Pages.
+
+## Author
+
+**Vijay Kumar** — Full Stack Developer
+
+- GitHub: [@VijayTech35](https://github.com/VijayTech35)
+- LinkedIn: [Vijay Kumar](https://www.linkedin.com/in/vijay-kumar-78454925b/)
+- Email: vijayyadav352005@gmail.com
