@@ -1,13 +1,11 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Particles } from "./Particles";
 
-const floatingIcons = [
-  { icon: "\u269B\uFE0F", top: "10%", left: "5%", delay: 0 },
-  { icon: "\uD83C\uDF10", top: "15%", right: "10%", delay: 1 },
-  { icon: "\u2615", bottom: "20%", left: "10%", delay: 2 },
-  { icon: "\uD83D\uDEE0\uFE0F", bottom: "15%", right: "5%", delay: 0.5 },
-  { icon: "\uD83D\uDD17", top: "40%", right: "0%", delay: 1.5 },
-  { icon: "\uD83C\uDF34", top: "5%", left: "40%", delay: 2.5 },
+const typingTexts = [
+  "Full Stack Developer \u00B7 MERN \u00B7 React",
+  "Java \u00B7 Spring Boot \u00B7 Node.js",
+  "Problem Solver \u00B7 Tech Enthusiast",
 ];
 
 const stagger = {
@@ -19,6 +17,40 @@ const stagger = {
 };
 
 export const Hero = () => {
+  const [textIndex, setTextIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const currentText = typingTexts[textIndex];
+    let timeout;
+
+    if (isDeleting) {
+      if (charIndex > 0) {
+        timeout = setTimeout(() => setCharIndex(c => c - 1), 30);
+      } else {
+        setIsDeleting(false);
+        setTextIndex((textIndex + 1) % typingTexts.length);
+        timeout = setTimeout(() => {}, 200);
+      }
+    } else {
+      if (charIndex < currentText.length) {
+        timeout = setTimeout(() => setCharIndex(c => c + 1), 50);
+      } else {
+        if (textIndex === 0) {
+          setIsPaused(true);
+        } else {
+          timeout = setTimeout(() => setIsDeleting(true), 2000);
+        }
+      }
+    }
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, textIndex, isPaused]);
+
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -50,12 +82,20 @@ export const Hero = () => {
               <span className="highlight">Vijay Kumar</span>
             </motion.h1>
 
-            <motion.h2 className="hero-stack" variants={stagger.item}>
-              Full Stack Developer <span style={{color:'var(--text-muted)'}}>—</span> <span className="highlight">MERN</span> <span style={{color:'var(--text-muted)'}}>|</span> Java <span style={{color:'var(--text-muted)'}}>|</span> React
-            </motion.h2>
+            <motion.div className="typing-wrapper" variants={stagger.item}>
+              <span className="typing-text">
+                {typingTexts[textIndex].substring(0, charIndex)}
+              </span>
+              <span className="typing-cursor" />
+            </motion.div>
+
+            <motion.p className="hero-tagline" variants={stagger.item}>
+              I build fast, scalable web apps that solve real problems.
+            </motion.p>
 
             <motion.p className="hero-desc" variants={stagger.item}>
-              I build scalable, user-friendly applications with modern technologies — from AI-powered meal planners to full-stack management systems. Passionate about solving real-world problems through clean code and great design.
+              From AI-powered meal planners to full-stack management systems —
+              I craft modern web experiences with clean code and great design.
             </motion.p>
 
             <motion.div className="hero-buttons" variants={stagger.item}>
@@ -78,27 +118,21 @@ export const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span>View Resume</span>
+                <span>Download CV</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
                 </svg>
               </motion.a>
-              <motion.button
-                className="btn-primary-custom"
-                onClick={() => scrollTo('contact')}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                style={{ background: 'linear-gradient(135deg, #00D4FF, #6C63FF)' }}
-              >
-                <span>Hire Me</span>
-              </motion.button>
             </motion.div>
 
             <motion.div className="hero-socials" variants={stagger.item}>
               {[
-                { href: "https://github.com/VijayTech35", icon: "\uD83D\uDCBB", label: "GitHub" },
-                { href: "https://www.linkedin.com/in/vijay-kumar-78454925b/", icon: "\uD83D\uDCBC", label: "LinkedIn" },
-                { href: "mailto:vijayyadav352005@gmail.com", icon: "\u2709\uFE0F", label: "Email" },
+                { href: "https://github.com/VijayTech35", label: "GitHub",
+                  icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> },
+                { href: "https://www.linkedin.com/in/vijay-kumar-78454925b/", label: "LinkedIn",
+                  icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> },
+                { href: "mailto:vijayyadav352005@gmail.com", label: "Email",
+                  icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> },
               ].map((link, i) => (
                 <motion.a
                   key={i}
@@ -124,27 +158,6 @@ export const Hero = () => {
               <div className="hero-glow-ring-3" />
               <div className="hero-glow-ring" />
               <div className="hero-glow-ring-2" />
-
-              <div className="hero-floating-icons">
-                {floatingIcons.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    className="floating-icon"
-                    style={{
-                      top: item.top, left: item.left, bottom: item.bottom, right: item.right,
-                    }}
-                    animate={{ y: [0, -12, 0] }}
-                    transition={{
-                      duration: 3 + i * 0.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: item.delay,
-                    }}
-                  >
-                    {item.icon}
-                  </motion.div>
-                ))}
-              </div>
 
               <motion.div
                 className="hero-image-bg"

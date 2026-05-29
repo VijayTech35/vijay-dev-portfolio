@@ -4,30 +4,32 @@ const experiences = [
   {
     role: "Full Stack Developer Intern",
     company: "Windflex Creative Pvt. Ltd.",
-    period: "Nov 2025 \u2013 April 2026",
+    companyShort: "WC",
+    period: "Nov 2025 – April 2026",
     bullets: [
-      "Developed and deployed full-stack web applications using React.js and Node.js, improving delivery turnaround by 25%",
-      "Built and documented 15+ REST APIs for internal tools, reducing integration time for new features",
-      "Optimized SQL queries, improving database read performance by 20% for high-traffic endpoints",
-      "Collaborated using Git workflows, managing 50+ pull requests across 4 team members",
+      "Built and deployed full-stack web apps using React.js and Node.js, reducing delivery time by 25%",
+      "Developed 15+ REST APIs for internal tools, cutting integration time for new features by 40%",
+      "Optimized SQL queries to improve database read performance by 20% for high-traffic endpoints",
+      "Managed 50+ pull requests across 4 team members using Git workflows, accelerating release cycles",
     ],
     badges: ["Full Stack", "REST APIs", "SQL", "Git", "React.js"],
-    icon: "\uD83D\uDCBB",
-    color: "#6C63FF",
+    color: "#00bcd4",
+    gradient: "linear-gradient(135deg, #00bcd4, #0097a7)",
   },
   {
     role: "Front-End Developer Intern",
     company: "HEAL Bharat",
-    period: "Aug 2025 \u2013 Oct 2025",
+    companyShort: "HB",
+    period: "Aug 2025 – Oct 2025",
     bullets: [
       "Built responsive UI components with React.js, achieving 95+ Lighthouse scores across all pages",
       "Improved page load speed by 30% through image optimization, lazy loading, and code splitting",
-      "Implemented accessible design patterns, enhancing user experience for 500+ daily active users",
+      "Implemented accessible design patterns, enhancing UX for 500+ daily active users",
       "Reduced mobile bounce rate by 15% with responsive layouts and touch-friendly interactions",
     ],
     badges: ["React.js", "UI/UX", "Performance", "Responsive", "Accessibility"],
-    icon: "\uD83C\uDF10",
-    color: "#00D4FF",
+    color: "#7c3aed",
+    gradient: "linear-gradient(135deg, #7c3aed, #a855f7)",
   },
 ];
 
@@ -58,7 +60,7 @@ export const Experience = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
         >
-          Where I've Worked
+          Where I've <span>Worked</span>
         </motion.h2>
         <motion.p
           className="section-desc"
@@ -82,21 +84,29 @@ export const Experience = () => {
             >
               <motion.div
                 className="timeline-dot"
+                style={{ background: exp.gradient }}
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.2 }}
+                transition={{ duration: 0.4, delay: 0.2, type: "spring" }}
               />
               <motion.div
                 className="timeline-content"
                 variants={stagger.item}
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -6 }}
+                style={{ borderColor: `${exp.color}22` }}
               >
-                <span className="timeline-date">
-                  <span>{exp.icon}</span> {exp.period}
-                </span>
-                <h3 className="timeline-role">{exp.role}</h3>
-                <p className="timeline-company" style={{ color: exp.color }}>{exp.company}</p>
+                <div className="timeline-card-glow" style={{ background: `radial-gradient(ellipse at top, ${exp.color}22, transparent 70%)` }} />
+                <div className="timeline-header">
+                  <div className="timeline-logo-badge" style={{ background: exp.gradient }}>
+                    <span>{exp.companyShort}</span>
+                  </div>
+                  <div className="timeline-header-info">
+                    <h3 className="timeline-role">{exp.role}</h3>
+                    <p className="timeline-company" style={{ color: exp.color }}>{exp.company}</p>
+                  </div>
+                  <span className="timeline-date">{exp.period}</span>
+                </div>
                 <ul className="timeline-bullets">
                   {exp.bullets.map((bullet, bi) => (
                     <motion.li
@@ -107,6 +117,7 @@ export const Experience = () => {
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: 0.3 + bi * 0.1 }}
                     >
+                      <span className="timeline-bullet-dot" style={{ background: exp.color }} />
                       {bullet}
                     </motion.li>
                   ))}
@@ -116,6 +127,7 @@ export const Experience = () => {
                     <motion.span
                       key={bi}
                       className="timeline-badge"
+                      style={{ borderColor: `${exp.color}44`, color: exp.color, background: `${exp.color}11` }}
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
@@ -125,6 +137,7 @@ export const Experience = () => {
                     </motion.span>
                   ))}
                 </div>
+                <div className="timeline-bottom-border" style={{ background: exp.gradient }} />
               </motion.div>
             </motion.div>
           ))}

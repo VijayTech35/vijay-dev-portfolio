@@ -4,11 +4,10 @@ import { useTheme } from "../App";
 
 const navLinks = [
   { id: 'home', label: 'Home' },
-  { id: 'stats', label: 'Stats' },
+  { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
-  { id: 'certifications', label: 'Certifications' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -86,25 +85,32 @@ export const NavBar = () => {
                 </a>
               </motion.li>
             ))}
-              <motion.li>
-                <a
-                  href="https://drive.google.com/file/d/1Fjnkfo8Cw06yRiGDikDxJ7XmpAhR6MN3/view"
-                  className="nav-resume-btn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-                  </svg>
-                  Resume
-                </a>
-              </motion.li>
+            <motion.li>
+              <a
+                href="https://drive.google.com/file/d/1Fjnkfo8Cw06yRiGDikDxJ7XmpAhR6MN3/view"
+                className="nav-resume-btn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Resume
+              </a>
+            </motion.li>
             <motion.li
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: 0.4 }}
             >
-              <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+              <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme"
+                style={{
+                  width: '40px', height: '40px', borderRadius: '50%', display: 'flex',
+                  alignItems: 'center', justifyContent: 'center', background: 'var(--glass-bg)',
+                  border: '1px solid var(--glass-border)', color: 'var(--text-primary)',
+                  fontSize: '18px', cursor: 'pointer', marginLeft: '8px'
+                }}
+              >
                 {darkMode ? '\u2600\uFE0F' : '\uD83C\uDF19'}
               </button>
             </motion.li>

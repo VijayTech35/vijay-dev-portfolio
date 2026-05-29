@@ -1,70 +1,78 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const skillCategories = [
+const brandColors = {
+  React: "#61DAFB",
+  "Next.js": "#ffffff",
+  JavaScript: "#F7DF1E",
+  TypeScript: "#3178C6",
+  HTML5: "#E34F26",
+  CSS3: "#1572B6",
+  "Tailwind CSS": "#06B6D4",
+  Redux: "#764ABC",
+  "Node.js": "#339933",
+  "Express.js": "#ffffff",
+  MongoDB: "#47A248",
+  PostgreSQL: "#4169E1",
+  "REST APIs": "#00bcd4",
+  "Spring Boot": "#6DB33F",
+  Git: "#F05032",
+  GitHub: "#ffffff",
+  Docker: "#2496ED",
+  AWS: "#FF9900",
+  Postman: "#FF6C37",
+  "VS Code": "#007ACC",
+  Figma: "#F24E1E",
+};
+
+const levelColors = {
+  Expert: { bg: "rgba(0, 230, 118, 0.15)", color: "#00E676" },
+  Advanced: { bg: "rgba(124, 58, 237, 0.15)", color: "#a78bfa" },
+  Intermediate: { bg: "rgba(255, 193, 7, 0.15)", color: "#FFD600" },
+  Beginner: { bg: "rgba(156, 163, 175, 0.15)", color: "#9CA3AF" },
+};
+
+const categories = [
   {
     title: "Frontend",
     skills: [
-      { name: "HTML", level: 90, note: "Semantic, accessible markup for all devices" },
-      { name: "CSS", level: 85, note: "Responsive layouts, animations, design systems" },
-      { name: "JavaScript", level: 82, note: "Modern ES6+, async patterns, DOM manipulation" },
-      { name: "React", level: 80, note: "Built scalable dashboards and interactive UIs" },
-      { name: "Next.js", level: 70, note: "SSR, static generation, API routes" },
+      { name: "React", level: "Expert", icon: "react" },
+      { name: "Next.js", level: "Expert", icon: "nextjs" },
+      { name: "JavaScript", level: "Expert", icon: "javascript" },
+      { name: "TypeScript", level: "Advanced", icon: "typescript" },
+      { name: "HTML5", level: "Expert", icon: "html5" },
+      { name: "CSS3", level: "Expert", icon: "css3" },
+      { name: "Tailwind CSS", level: "Advanced", icon: "tailwindcss" },
+      { name: "Redux", level: "Advanced", icon: "redux" },
     ],
   },
   {
     title: "Backend",
     skills: [
-      { name: "Node.js", level: 78, note: "REST APIs, real-time features, microservices" },
-      { name: "Express.js", level: 75, note: "Middleware, routing, error handling patterns" },
-      { name: "Spring Boot", level: 70, note: "Designed REST APIs for enterprise systems" },
+      { name: "Node.js", level: "Expert", icon: "nodejs" },
+      { name: "Express.js", level: "Expert", icon: "express" },
+      { name: "MongoDB", level: "Advanced", icon: "mongodb" },
+      { name: "PostgreSQL", level: "Intermediate", icon: "postgresql" },
+      { name: "REST APIs", level: "Expert", icon: null },
+      { name: "Spring Boot", level: "Intermediate", icon: "spring" },
     ],
   },
   {
-    title: "Database",
+    title: "Tools & DevOps",
     skills: [
-      { name: "MongoDB", level: 75, note: "Schema design, aggregation pipelines, indexing" },
-      { name: "MySQL", level: 72, note: "Complex queries, normalization, performance tuning" },
-    ],
-  },
-  {
-    title: "Tools & Platforms",
-    skills: [
-      { name: "Git", level: 85, note: "Version control, branching strategies, CI/CD" },
-      { name: "Docker", level: 65, note: "Containerization, multi-service deployments" },
-      { name: "AWS", level: 60, note: "EC2, S3, basic cloud infrastructure" },
-      { name: "Postman", level: 78, note: "API testing, collections, workflow automation" },
-    ],
-  },
-  {
-    title: "Languages",
-    skills: [
-      { name: "Java", level: 80, note: "OOP, multithreading, Spring ecosystem" },
-      { name: "JavaScript", level: 82, note: "Full-stack, async, functional programming" },
-    ],
-  },
-  {
-    title: "Core Concepts",
-    skills: [
-      { name: "DSA", level: 75, note: "Problem-solving, algorithms, data structures" },
-      { name: "OOP", level: 80, note: "Design patterns, SOLID, encapsulation" },
-      { name: "DBMS", level: 72, note: "ACID, normalization, query optimization" },
+      { name: "Git", level: "Expert", icon: "git" },
+      { name: "GitHub", level: "Expert", icon: "github" },
+      { name: "Docker", level: "Intermediate", icon: "docker" },
+      { name: "AWS", level: "Intermediate", icon: "amazonwebservices" },
+      { name: "Postman", level: "Advanced", icon: null },
+      { name: "VS Code", level: "Expert", icon: "vscode" },
+      { name: "Figma", level: "Intermediate", icon: "figma" },
     ],
   },
 ];
 
-const getProficiency = (level) => {
-  if (level >= 85) return { label: "Proficient", color: "var(--neon-green)" };
-  if (level >= 70) return { label: "Intermediate", color: "var(--secondary)" };
-  return { label: "Beginner", color: "var(--accent)" };
-};
-
 export const Skills = () => {
-  const [openCategory, setOpenCategory] = useState(null);
-
-  const toggleCategory = (index) => {
-    setOpenCategory(openCategory === index ? null : index);
-  };
+  const [activeTab, setActiveTab] = useState(0);
 
   return (
     <section className="skills" id="skills">
@@ -96,68 +104,70 @@ export const Skills = () => {
           Technologies and tools I work with to build amazing applications
         </motion.p>
 
-        <div className="skills-accordion">
-          {skillCategories.map((cat, ci) => {
-            const isOpen = openCategory === ci;
-            return (
-              <div key={ci} className={`skill-accordion-item ${isOpen ? 'open' : ''}`}>
-                <button
-                  className="skill-accordion-header"
-                  onClick={() => toggleCategory(ci)}
-                >
-                  <span className="skill-accordion-title">{cat.title}</span>
-                  <span className="skill-accordion-count">{cat.skills.length} skills</span>
-                  <motion.span
-                    className="skill-accordion-arrow"
-                    animate={{ rotate: isOpen ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="6 9 12 15 18 9"/>
-                    </svg>
-                  </motion.span>
-                </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      className="skill-accordion-body"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: "easeInOut" }}
-                    >
-                      <div className="skill-pills-grid">
-                        {cat.skills.map((skill, si) => {
-                          const prof = getProficiency(skill.level);
-                          return (
-                            <motion.div
-                              key={si}
-                              className="skill-pill-card"
-                              initial={{ opacity: 0, scale: 0.9 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ duration: 0.25, delay: si * 0.05 }}
-                            >
-                              <div className="skill-pill-top">
-                                <span className="skill-pill-name">{skill.name}</span>
-                                <span
-                                  className="skill-pill-level"
-                                  style={{ color: prof.color, borderColor: prof.color }}
-                                >
-                                  {prof.label}
-                                </span>
-                              </div>
-                              <p className="skill-pill-note">{skill.note}</p>
-                            </motion.div>
-                          );
-                        })}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
+        <div className="skills-tabs">
+          {categories.map((cat, ci) => (
+            <button
+              key={ci}
+              className={`skills-tab ${activeTab === ci ? "active" : ""}`}
+              onClick={() => setActiveTab(ci)}
+            >
+              {cat.title}
+            </button>
+          ))}
         </div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            className="skills-grid"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {categories[activeTab].skills.map((skill, si) => (
+              <motion.div
+                key={si}
+                className="skill-pill"
+                style={{
+                  borderLeft: `3px solid ${brandColors[skill.name]}`,
+                }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: si * 0.06 }}
+                whileHover={{
+                  y: -3,
+                  boxShadow: `0 8px 30px ${brandColors[skill.name]}44`,
+                }}
+              >
+                <div className="skill-pill-logo">
+                  {skill.icon ? (
+                    <img
+                      src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${skill.icon}/${skill.icon}${skill.icon === 'amazonwebservices' ? '-original-wordmark' : '-original'}.svg`}
+                      alt={skill.name}
+                      className="skill-pill-img"
+                    />
+                  ) : (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={brandColors[skill.name]} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="16 18 22 12 16 6" />
+                      <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                  )}
+                </div>
+                <span className="skill-pill-name">{skill.name}</span>
+                <span
+                  className="skill-pill-level"
+                  style={{
+                    background: levelColors[skill.level].bg,
+                    color: levelColors[skill.level].color,
+                  }}
+                >
+                  {skill.level}
+                </span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

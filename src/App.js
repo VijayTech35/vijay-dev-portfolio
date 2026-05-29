@@ -5,14 +5,15 @@ import { NavBar } from "./components/NavBar";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
 import { Stats } from "./components/Stats";
+import { GitHubLeetCode } from "./components/GitHubLeetCode";
 import { Skills } from "./components/Skills";
 import { Experience } from "./components/Experience";
 import { Projects } from "./components/Projects";
-import { GitHubContributions } from "./components/GitHubContributions";
-import { LeetCodeStats } from "./components/LeetCodeStats";
 import { Certifications } from "./components/Certifications";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { BackToTop } from "./components/BackToTop";
+import { CursorGlow } from "./components/CursorGlow";
 
 export const ThemeContext = createContext();
 export const useTheme = () => useContext(ThemeContext);
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <ThemeContext.Provider value={{ darkMode, toggleTheme }}>
+      <CursorGlow />
       <AnimatePresence>
         {loading ? (
           <motion.div
@@ -81,14 +83,14 @@ function App() {
             <motion.div variants={sectionVariants}><Hero /></motion.div>
             <motion.div variants={sectionVariants}><About /></motion.div>
             <motion.div variants={sectionVariants}><Stats /></motion.div>
+            <motion.div variants={sectionVariants}><GitHubLeetCode /></motion.div>
             <motion.div variants={sectionVariants}><Skills /></motion.div>
             <motion.div variants={sectionVariants}><Experience /></motion.div>
             <motion.div variants={sectionVariants}><Projects /></motion.div>
-            <motion.div variants={sectionVariants}><GitHubContributions /></motion.div>
-            <motion.div variants={sectionVariants}><LeetCodeStats /></motion.div>
             <motion.div variants={sectionVariants}><Certifications /></motion.div>
             <motion.div variants={sectionVariants}><Contact /></motion.div>
             <motion.div variants={sectionVariants}><Footer /></motion.div>
+            <BackToTop />
           </motion.div>
         )}
       </AnimatePresence>
