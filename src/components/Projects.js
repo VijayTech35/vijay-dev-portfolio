@@ -22,7 +22,7 @@ const projects = [
     gradient: "linear-gradient(135deg, #00bcd4, #0097a7)",
     liveUrl: "https://fraud-identity-dashboard.vercel.app",
     githubUrl: null,
-    imgSrc: null,
+    imgSrc: "/img/project-fraud.png",
     accent: "#00bcd4",
   },
   {
@@ -33,7 +33,7 @@ const projects = [
     gradient: "linear-gradient(135deg, #00bcd4, #0097a7)",
     liveUrl: "https://digital-marketing-landing-page-lyart.vercel.app",
     githubUrl: null,
-    imgSrc: null,
+    imgSrc: "/img/project-digital-marketing.png",
     accent: "#00bcd4",
   },
   {
@@ -44,7 +44,7 @@ const projects = [
     gradient: "linear-gradient(135deg, #00bcd4, #0097a7)",
     liveUrl: "https://trip-and-travel-app-wac2.vercel.app",
     githubUrl: null,
-    imgSrc: null,
+    imgSrc: "/img/project-tripbuddy.png",
     accent: "#00bcd4",
   },
   {
@@ -55,7 +55,7 @@ const projects = [
     gradient: "linear-gradient(135deg, #00bcd4, #0097a7)",
     liveUrl: null,
     githubUrl: "https://github.com/VijayTech35",
-    imgSrc: null,
+    imgSrc: "/img/project-restaurant.png",
     accent: "#00bcd4",
   },
   {
@@ -66,7 +66,7 @@ const projects = [
     gradient: "linear-gradient(135deg, #00bcd4, #0097a7)",
     liveUrl: "https://vijaytech35.github.io/namma-homestay-android/",
     githubUrl: "https://github.com/VijayTech35/namma-homestay-android.git",
-    imgSrc: null,
+    imgSrc: "/img/project-homestay.png",
     accent: "#00bcd4",
   },
   {
@@ -77,7 +77,7 @@ const projects = [
     gradient: "linear-gradient(135deg, #00bcd4, #0097a7)",
     liveUrl: "https://nutrigenz-meal-planner.vercel.app",
     githubUrl: null,
-    imgSrc: null,
+    imgSrc: "/img/project-nutrigenz.png",
     accent: "#00bcd4",
   },
 ];
