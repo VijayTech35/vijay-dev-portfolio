@@ -4,19 +4,9 @@ A modern, responsive personal portfolio website built with React. Showcases skil
 
 **Live Demo:** [https://vijay-dev-portfolio.vercel.app](https://vijay-dev-portfolio.vercel.app)
 
+![Portfolio Preview](public/img/portfolio-screenshot.png)
+
 ---
-
-## Screenshots
-
-| Project | Preview |
-|---------|---------|
-| Shahi Scoops | ![Shahi Scoops](public/img/project-shahi-scoops.png) |
-| Fraud Identity Dashboard | ![Fraud Identity Dashboard](public/img/project-fraud.png) |
-| Digital Marketing Landing Page | ![Digital Marketing Landing Page](public/img/project-digital-marketing.png) |
-| TripBuddy - Travel App | ![TripBuddy Travel App](public/img/project-tripbuddy.png) |
-| Restaurant Management System | ![Restaurant Management System](public/img/project-restaurant.png) |
-| Namma Homestay Android App | ![Namma Homestay Android App](public/img/project-homestay.png) |
-| NutriGenZ AI - Meal Planner | ![NutriGenZ AI Meal Planner](public/img/project-nutrigenz.png) |
 
 ## Built With
 
